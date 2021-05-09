@@ -6,51 +6,64 @@ class SearchIndex extends React.Component {
     super(props);
     this.state = {
       things: [
-        "pen ",
-        "marker ",
-        "eraser ",
-        "notebook ",
-        "pencil ",
-        "scissors ",
-        "highlighter ",
-        "stapler ",
-        "paper clip ",
-        "binder ",
-        "hole punch ",
-        "laminator ",
-        "laminating sheets ",
-        "protective sheets ",
-        "index cards ",
+        "pen",
+        "marker",
+        "eraser",
+        "notebook",
+        "pencil",
+        "scissors",
+        "highlighter",
+        "stapler",
+        "paper clip",
+        "binder",
+        "hole punch",
+        "laminator",
+        "laminating sheets",
+        "protective sheets",
+        "index cards",
       ],
-      searchTerm: '',
-      results: []
-        }
+      searchTerm: "",
+      results: [],
+    };
   }
 
   editSearchTerm = (e) => {
-    
-    this.setState ({
-      searchTerm: e.target.value
-    })
+    this.setState({
+      searchTerm: e.target.value,
+    });
     console.log(this.state.searchTerm);
-    this.searchFunction()
-  }
-  
+    this.searchFunction();
+  };
+
   searchFunction = () => {
-    return (this.state.things.filter(thing => thing.includes(this.state.searchTerm)))
-  }
-  
+    return this.state.things.filter((thing) =>
+      thing.includes(this.state.searchTerm)
+    );
+  };
+
   render() {
     return (
       <div>
-        <label htmlFor='search'>Search Items</label>
-        <Input type="text" value={this.state.searchTerm} onChange = {this.editSearchTerm}  placeholder='Search Here'/>
+        <label htmlFor="search">Search Items</label>
+        <Input
+          type="text"
+          value={this.state.searchTerm}
+          onChange={this.editSearchTerm}
+        />
         <h3>Results:</h3>
-        <p>{this.searchFunction()}</p>
+        {!this.state.searchTerm ? (
+          <>
+            {" "}
+            {this.state.things.map((thing) => (
+              <p>{thing}</p>
+            ))}{" "}
+          </>
+        ) : (
+          <p>{this.searchFunction()}</p>
+        )}
       </div>
     );
   }
 }
 
 export default SearchIndex;
-

@@ -8,11 +8,7 @@ export default class DogFetch extends React.Component {
     };
   }
 
-  refreshPage = () => {
-    window.location.reload();
-  }
-
-  componentDidMount() {
+  dogFetch = () => {
     console.log("pic received");
     // console.log(this.state.img);
     fetch("https://dog.ceo/api/breeds/image/random")
@@ -29,8 +25,9 @@ export default class DogFetch extends React.Component {
   render() {
     return (
       <div>
-        <img src={this.state.img} alt="doggie" />
-        <button onClick={ this.refreshPage }>click me!</button>
+        {(this.state.img) ? <img src={this.state.img} alt="doggie" /> : <> </>}
+        
+        <button onClick={ this.dogFetch }>click me!</button>
       </div>
     );
   }
